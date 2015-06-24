@@ -2,7 +2,6 @@ define(['gol','marionette', 'underscore'], function(gol,Marionette, _){
 	return Marionette.ItemView.extend({
         initialize : function(){
             this.indexInCollection = this.options.indexInCollection;
-
         },
 		template: _.template(''),
         tagName : 'li',
@@ -10,28 +9,28 @@ define(['gol','marionette', 'underscore'], function(gol,Marionette, _){
             'click' : 'clickEvent'
         },
         modelEvents : {
-          'change life' : 'changeStatus'
-        },
-        onRender : function(){
-            this.changeStatus();
+          'change isLive' : 'changeStatus'
         },
         changeStatus : function(){
-            if(this.model.get('live') == 1){
+            if(this.model.get('isLive') == 1){
                 this.$el.addClass('live');
             } else {
                 this.$el.removeClass('live');
             }
         },
         className : function(){
-
+            var className = '';
             if(this.options.indexInCollection < gol.settings.get('cols')){
-                return 'first-row';
+                className =  'first-row';
             }
             if(this.options.indexInCollection >= gol.settings.get('total') - gol.settings.get('cols')){
-                return 'last-row';
+                className = 'last-row';
             }
 
-            return 'test';
+            if (this.model.get('isLive')){
+                className += ' live'
+            }
+            return className;
         },
         clickEvent : function(){
             console.log(this.model.toJSON(), this.model.neighbours, this.model.getLiveNeighboursCount());

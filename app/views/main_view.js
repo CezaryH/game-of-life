@@ -7,8 +7,7 @@ define(['gol','marionette', 'underscore','collections/mainCollection', 'views/el
 
 	for(var i=0 ; i < gol.settings.get('total'); i++){
 		items.push({
-			name : 'test_' + i,
-			live : generateLiving()
+			isLive : generateLiving()
 		});
 	}
 	
@@ -27,9 +26,8 @@ define(['gol','marionette', 'underscore','collections/mainCollection', 'views/el
         step : function(){
             this.collection.step();
         },
-        onRender : function(){
-            var that = this;
-            that.collection.setNeighbours();
+        onBeforeRender : function(){
+            this.collection.getNeighbours();
         },
         childViewOptions : function(model){
             return {

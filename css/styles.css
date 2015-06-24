@@ -26,12 +26,9 @@ body, html{
     height:10px;
     box-sizing: border-box;
     overflow: hidden;
+    background: #fff;
 }
 
 .collection .live{
     background: #000;
-}
-
-.game .el.live{
-	background:#000;
 }

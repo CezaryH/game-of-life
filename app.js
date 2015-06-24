@@ -18,7 +18,5 @@ requirejs.config({
 });
 
 require(['gol'],function(gol){
-	
 	gol.start();
-	
 });

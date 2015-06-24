@@ -6,7 +6,6 @@ define(
                 rows : 60,
                 cols : 60
             },
-
             initialize : function(){
                 this.set('total', this.countTotal())
             },

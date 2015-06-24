@@ -1,30 +1,31 @@
 define(
 	['backbone','marionette', 'models/gol_main_model'],
 	function(Backbone, Marionette, golMainModel){
-        if (window.__agent) {
-            window.__agent.start(Backbone, Marionette);
-        }
-		var gol = new Marionette.Application();
 
-        gol.settings = new golMainModel();
+		window.app = new Marionette.Application();
 
-		var Mainlayout = Marionette.LayoutView.extend({
+        window.app.settings = new golMainModel({
+            rows : 60,
+            cols : 60
+        });
+
+        var rootView = Marionette.LayoutView.extend({
 			el: '#app-container',
 			regions: {
 			  mainRegion: ".js-main-region"
 			}
-		});			
+		});
 
-		
-		gol.addInitializer( function(){
-			var lay = new Mainlayout();
+
+        window.app.addInitializer( function(){
+            window.app.layout = new rootView();
 
             require(['views/main_view'], function(MainView){
                 var mainView = new MainView();
-                lay.getRegion('mainRegion').show(mainView);
+                window.app.layout.getRegion('mainRegion').show(mainView);
             });
 
 		});
 		
-		return gol;
+		return window.app;
 });

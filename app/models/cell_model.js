@@ -3,7 +3,7 @@ define(
     function(gol, Marionette, Backbone){
         return Backbone.Model.extend({
             defaults : {
-                live : false,
+                isLive : false,
                 birth : false,
                 die : false
             },
@@ -44,11 +44,11 @@ define(
             checkCondition : function(){
                 var livingNeighbours = this.getLiveNeighboursCount();
 
-                if(this.get('live') == false && livingNeighbours == 3){
+                if(this.get('isLive') == false && livingNeighbours == 3){
                     this.set('birth', true);
                 }
 
-                if(this.get('live') == true){
+                if(this.get('isLive') == true){
                     if((livingNeighbours < 2 || livingNeighbours > 3 )){
                         this.set('die', true);
                     }
@@ -56,11 +56,11 @@ define(
             },
             updateCondition : function(){
                 if(this.get('birth')){
-                    this.set('live', true);
+                    this.set('isLive', true);
                 }
 
                 if(this.get('die')){
-                    this.set('live', false);
+                    this.set('isLive', false);
                 }
 
                 this.set('die', false);
@@ -68,7 +68,7 @@ define(
             },
             getLiveNeighboursCount : function(){
                 return this.neighbours.reduce(function(mem, model){
-                    return (model.get('live')) ? mem + 1 : mem;
+                    return (model.get('isLive')) ? mem + 1 : mem;
                 }, 0);
             }
         });
