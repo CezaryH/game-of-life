@@ -11,6 +11,7 @@ define(['marionette', 'backbone', 'models/cell_model'], function(Marionette, Bac
                 arr : []
             };
 
+            Marionette.actAsCollection(changed, 'arr');
 
             this.each(function(model){
                 model.checkCondition();
@@ -19,7 +20,8 @@ define(['marionette', 'backbone', 'models/cell_model'], function(Marionette, Bac
                 }
             });
 
-            Marionette.actAsCollection(changed, 'arr');
+
+
             changed.each(function(model){
                 model.updateCondition();
             });

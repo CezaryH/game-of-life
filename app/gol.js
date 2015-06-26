@@ -16,13 +16,12 @@ define(
 			}
 		});
 
-
         window.app.addInitializer( function(){
-            window.app.layout = new rootView();
+            window.app.rootView = new rootView();
 
             require(['views/main_view'], function(MainView){
                 var mainView = new MainView();
-                window.app.layout.getRegion('mainRegion').show(mainView);
+                window.app.rootView.getRegion('mainRegion').show(mainView);
             });
 
 		});

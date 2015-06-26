@@ -10,13 +10,17 @@ requirejs.config({
 	shim: {
         marionette: {
             deps: ['jquery', 'underscore']
-        },
-        underscore: {
-            exports: '_'
         }
     }
 });
+require(['marionette', 'backbone'], function(){
 
-require(['gol'],function(gol){
-	gol.start();
+    if (window.__agent) {
+        window.__agent.disableAnalytics = true;
+        window.__agent.start(Backbone, Marionette);
+    }
+
+    require(['gol'], function(app){
+        app.start();
+    });
 });

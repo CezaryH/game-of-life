@@ -10,27 +10,28 @@ define(['gol','marionette', 'underscore','collections/mainCollection', 'views/el
 			isLive : generateLiving()
 		});
 	}
+
 	
 	return Marionette.CompositeView.extend({
 		childView : ElementView,
 		childViewContainer : '.collection',
 		template : '#main-view-template',
+        collection : new Collection(items),
         events : {
             'click .step' : 'step',
             'click .autoStart' : 'autoStart',
             'click .autoStop' : 'autoStop'
         },
-		initialize: function(){
-			this.collection = new Collection(items);
-		},
+        initialize : function(){
+            this.itemViewtemplate =  Marionette.TemplateCache.get("#collection-item-template");
+            this.collection.getNeighbours();
+        },
         step : function(){
             this.collection.step();
         },
-        onBeforeRender : function(){
-            this.collection.getNeighbours();
-        },
         childViewOptions : function(model){
             return {
+                itemViewtemplate : this.itemViewtemplate,
                 indexInCollection : this.collection.indexOf(model)
             };
         },

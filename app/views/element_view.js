@@ -3,7 +3,7 @@ define(['gol','marionette', 'underscore'], function(gol,Marionette, _){
         initialize : function(){
             this.indexInCollection = this.options.indexInCollection;
         },
-		template: _.template(''),
+		template: false,
         tagName : 'li',
         events : {
             'click' : 'clickEvent'
