@@ -7,11 +7,20 @@ define(['marionette', 'backbone', 'models/cell_model'], function(Marionette, Bac
             });
         },
         step : function(){
-            this.each(function(model){
-                model.checkCondition();
-            });
+            var changed = {
+                arr : []
+            };
+
 
             this.each(function(model){
+                model.checkCondition();
+                if(model.get('stateChange')){
+                    changed.arr.push(model);
+                }
+            });
+
+            Marionette.actAsCollection(changed, 'arr');
+            changed.each(function(model){
                 model.updateCondition();
             });
         }

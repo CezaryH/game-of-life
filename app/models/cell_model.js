@@ -5,7 +5,8 @@ define(
             defaults : {
                 isLive : false,
                 birth : false,
-                die : false
+                die : false,
+                stateChange : false
             },
             setNeighbours : function(){
                 var that = this,
@@ -53,6 +54,10 @@ define(
                         this.set('die', true);
                     }
                 }
+
+                if(this.get('birth') || this.get('die')){
+                    this.set('stateChange', true);
+                }
             },
             updateCondition : function(){
                 if(this.get('birth')){
@@ -65,6 +70,7 @@ define(
 
                 this.set('die', false);
                 this.set('birth', false);
+                this.set('stateChange', false);
             },
             getLiveNeighboursCount : function(){
                 return this.neighbours.reduce(function(mem, model){
