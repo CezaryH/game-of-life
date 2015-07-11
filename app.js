@@ -14,12 +14,6 @@ requirejs.config({
     }
 });
 require(['marionette', 'backbone'], function(){
-
-    if (window.__agent) {
-        window.__agent.disableAnalytics = true;
-        window.__agent.start(Backbone, Marionette);
-    }
-
     require(['gol'], function(app){
         app.start();
     });

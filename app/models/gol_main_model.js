@@ -7,7 +7,7 @@ define(
                 cols : 60
             },
             initialize : function(){
-                this.set('total', this.countTotal())
+                this.set('total', this.countTotal());
             },
             countTotal : function(){
                 return this.get('rows') * this.get('cols');

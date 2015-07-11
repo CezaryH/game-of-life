@@ -1,13 +1,10 @@
 define(['gol','marionette', 'underscore','collections/mainCollection', 'views/element_view'],
     function(gol, Marionette, _, Collection, ElementView){
-	var items = [],
-        generateLiving = function(){
-            return Math.random() < 0.2;
-        };
+	var items = [];
 
 	for(var i=0 ; i < gol.settings.get('total'); i++){
 		items.push({
-			isLive : generateLiving()
+			isLive :  (Math.random() < 0.2)
 		});
 	}
 
@@ -23,7 +20,6 @@ define(['gol','marionette', 'underscore','collections/mainCollection', 'views/el
             'click .autoStop' : 'autoStop'
         },
         initialize : function(){
-            this.itemViewtemplate =  Marionette.TemplateCache.get("#collection-item-template");
             this.collection.getNeighbours();
         },
         step : function(){
@@ -31,7 +27,6 @@ define(['gol','marionette', 'underscore','collections/mainCollection', 'views/el
         },
         childViewOptions : function(model){
             return {
-                itemViewtemplate : this.itemViewtemplate,
                 indexInCollection : this.collection.indexOf(model)
             };
         },

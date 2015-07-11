@@ -1,4 +1,4 @@
-define(['gol','marionette', 'underscore'], function(gol,Marionette, _){
+define(['gol','marionette'], function(gol, Marionette){
 	return Marionette.ItemView.extend({
         initialize : function(){
             this.indexInCollection = this.options.indexInCollection;
